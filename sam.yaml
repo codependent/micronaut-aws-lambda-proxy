@@ -1,0 +1,29 @@
+AWSTemplateFormatVersion: '2010-09-09'
+Transform: AWS::Serverless-2016-10-31
+Description: AWS MicronautAwsApi2Poc API - com.codependent.micronaut.awslambda::micronaut-aws-lambda-proxy
+Globals:
+  Api:
+    EndpointConfiguration: REGIONAL
+Resources:
+  MicronautAwsApi2PocFunction:
+    Type: AWS::Serverless::Function
+    Properties:
+      Handler: com.codependent.micronaut.awslambda.StreamLambdaHandler::handleRequest
+      Runtime: java8
+      CodeUri: build/distributions/micronaut-aws-lambda-proxy-0.1.zip
+      MemorySize: 512
+      Policies: AWSLambdaBasicExecutionRole
+      Timeout: 15
+      Events:
+        GetResource:
+          Type: Api
+          Properties:
+            Path: /{proxy+}
+            Method: any
+
+Outputs:
+  MicronautAwsApi2PocApi:
+    Description: URL for application
+    Value: !Sub 'https://${ServerlessRestApi}.execute-api.${AWS::Region}.amazonaws.com/Prod/ping'
+    Export:
+      Name: MicronautAwsApi2PocApi
