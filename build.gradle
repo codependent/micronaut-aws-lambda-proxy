@@ -30,7 +30,7 @@ configurations {
 }
 
 dependencies {
-    compile "io.micronaut.aws:micronaut-function-aws-api-proxy"
+    compile "io.micronaut.aws:micronaut-function-aws-api-proxy:1.1.0.RC1"
     compile "io.micronaut:micronaut-http-client"
     compile "io.micronaut:micronaut-http-server-netty"
     compile "org.jetbrains.kotlin:kotlin-stdlib-jdk8:${kotlinVersion}"
