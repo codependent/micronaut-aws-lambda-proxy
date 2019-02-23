@@ -17,6 +17,9 @@ repositories {
     mavenLocal()
     mavenCentral()
     maven { url "https://jcenter.bintray.com" }
+    maven {
+        url 'http://dynamodb-local.s3-website-us-west-2.amazonaws.com/release'
+    }
 }
 
 dependencyManagement {
@@ -41,7 +44,6 @@ dependencies {
     kapt "io.micronaut:micronaut-inject-java"
     kapt "io.micronaut:micronaut-validation"
     kaptTest "io.micronaut:micronaut-inject-java"
-    runtime "ch.qos.logback:logback-classic:1.2.3"
     runtime "org.apache.logging.log4j:log4j-core:2.8.2"
     runtime "org.apache.logging.log4j:log4j-api:2.8.2"
     runtime "org.apache.logging.log4j:log4j-slf4j-impl:2.8.2"
@@ -49,8 +51,11 @@ dependencies {
     runtime "com.fasterxml.jackson.module:jackson-module-kotlin:2.9.7"
     testCompile "org.junit.jupiter:junit-jupiter-api"
     testCompile "org.jetbrains.spek:spek-api:1.1.5"
+    testCompile "io.micronaut.test:micronaut-test-core"
+    testCompile "com.amazonaws:DynamoDBLocal:1.11.0"
     testRuntime "org.junit.jupiter:junit-jupiter-engine"
     testRuntime "org.jetbrains.spek:spek-junit-platform-engine:1.1.5"
+    testRuntime "io.micronaut.test:micronaut-test-junit5"
 }
 
 shadowJar {
@@ -94,4 +99,18 @@ compileTestKotlin {
 	    jvmTarget = '1.8' 
 	    javaParameters = true 
 	}
+}
+
+task copyNativeDeps(type: Copy) {
+    from (configurations.testCompile) {
+        include "*.dylib"
+        include "*.so"
+        include "*.dll"
+    }
+    into 'build/libs'
+}
+
+test.dependsOn copyNativeDeps
+test.doFirst {
+    systemProperty "java.library.path", 'build/libs'
 }
