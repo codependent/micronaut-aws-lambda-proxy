@@ -20,6 +20,8 @@ service: micronaut-aws-lambda-proxy # NOTE: update this with your service name
 provider:
   name: aws
   runtime: java8
+  iamManagedPolicies:
+    - 'arn:aws:iam::313316477550:policy/service-role/AWSLambdaMicroserviceExecutionRole-8a38f4af-4c33-478b-adb4-bae44391a656'
 
 # you can overwrite defaults here
 #  stage: dev
