@@ -5,6 +5,7 @@ plugins {
     id "org.jetbrains.kotlin.jvm" version "1.2.61"
     id "org.jetbrains.kotlin.kapt" version "1.2.61"
     id "org.jetbrains.kotlin.plugin.allopen" version "1.2.61"
+    id "org.jetbrains.kotlin.plugin.noarg" version "1.2.61"
 }
 
 
@@ -36,6 +37,7 @@ dependencies {
     compile "org.jetbrains.kotlin:kotlin-stdlib-jdk8:${kotlinVersion}"
     compile "org.jetbrains.kotlin:kotlin-reflect:${kotlinVersion}"
     compile "io.micronaut:micronaut-runtime"
+    compile 'com.amazonaws:aws-java-sdk-dynamodb:1.11.504'
     kapt "io.micronaut:micronaut-inject-java"
     kapt "io.micronaut:micronaut-validation"
     kaptTest "io.micronaut:micronaut-inject-java"
@@ -73,8 +75,10 @@ test {
     useJUnitPlatform()
 }
 
-allOpen {
-	annotation("io.micronaut.aop.Around")
+
+
+noArg {
+    annotation("com.amazonaws.services.dynamodbv2.datamodeling.DynamoDBTable")
 }
 
 compileKotlin {
