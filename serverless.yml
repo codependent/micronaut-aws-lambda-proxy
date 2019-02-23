@@ -52,8 +52,8 @@ package:
 functions:
   ping:
     handler: com.codependent.micronaut.awslambda.StreamLambdaHandler::handleRequest
-    memorySize: 256
-    timeout: 15
+    memorySize: 384
+    timeout: 60
     events:
       - http: ANY {proxy+}
 
