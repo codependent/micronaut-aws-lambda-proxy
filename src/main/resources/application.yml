@@ -3,3 +3,5 @@ micronaut:
         name: micronaut-aws-lambda-proxy
 jackson:
     module-scan: false
+
+

@@ -30,7 +30,7 @@ class PingServiceIntegrationTests {
     fun beforeEach() {
         println(amazonDynamoDb)
         if (!tableInitialized) {
-            val tableName = "dev.ping"
+            val tableName = "test.ping"
             val hashKeyName = "id"
             createTable(amazonDynamoDb, tableName, hashKeyName)
             tableInitialized = true
