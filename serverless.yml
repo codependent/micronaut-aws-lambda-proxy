@@ -20,8 +20,6 @@ service: micronaut-aws-lambda-proxy # NOTE: update this with your service name
 provider:
   name: aws
   runtime: java8
-  environment:
-    MICRONAUT_ENVIRONMENTS: ${opt:stage}
   iamManagedPolicies:
     - 'arn:aws:iam::313316477550:policy/service-role/AWSLambdaMicroserviceExecutionRole-8a38f4af-4c33-478b-adb4-bae44391a656'
 
@@ -58,6 +56,8 @@ functions:
     handler: com.codependent.micronaut.awslambda.StreamLambdaHandler::handleRequest
     memorySize: 384
     timeout: 60
+    environment:
+      MICRONAUT_ENVIRONMENTS: ${opt:stage}
     events:
       - http: ANY {proxy+}
 
