@@ -55,9 +55,9 @@ functions:
   ping:
     handler: com.codependent.micronaut.awslambda.StreamLambdaHandler::handleRequest
     memorySize: 384
-    timeout: 60
+    timeout: 30
     environment:
-      MICRONAUT_ENVIRONMENTS: ${opt:stage}
+      MICRONAUT_ENVIRONMENTS: ${opt:stage, 'dev'}
     events:
       - http: ANY {proxy+}
 
