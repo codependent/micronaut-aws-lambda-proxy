@@ -8,7 +8,7 @@ object Application {
     fun main(args: Array<String>) {
         Micronaut.build()
                 .packages("com.codependent.micronaut.awslambda")
-                .mainClass(Application.javaClass)
+                .mainClass(Application::class.java)
                 .start()
     }
 }

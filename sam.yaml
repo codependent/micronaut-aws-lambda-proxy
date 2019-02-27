@@ -1,11 +1,11 @@
 AWSTemplateFormatVersion: '2010-09-09'
 Transform: AWS::Serverless-2016-10-31
-Description: AWS MicronautAwsApi2Poc API - com.codependent.micronaut.awslambda::micronaut-aws-lambda-proxy
+Description: AWS MicronautAwsLambdaProxy API - micronaut.aws.lambda.proxy::micronaut-aws-lambda-proxy
 Globals:
   Api:
     EndpointConfiguration: REGIONAL
 Resources:
-  MicronautAwsApi2PocFunction:
+  MicronautAwsLambdaProxyFunction:
     Type: AWS::Serverless::Function
     Properties:
       Handler: com.codependent.micronaut.awslambda.StreamLambdaHandler::handleRequest
@@ -22,8 +22,8 @@ Resources:
             Method: any
 
 Outputs:
-  MicronautAwsApi2PocApi:
+  MicronautAwsLambdaProxyApi:
     Description: URL for application
     Value: !Sub 'https://${ServerlessRestApi}.execute-api.${AWS::Region}.amazonaws.com/Prod/ping'
     Export:
-      Name: MicronautAwsApi2PocApi
+      Name: MicronautAwsLambdaProxyApi

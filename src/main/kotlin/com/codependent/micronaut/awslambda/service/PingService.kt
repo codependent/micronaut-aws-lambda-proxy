@@ -8,6 +8,10 @@ import javax.inject.Singleton
 @Singleton
 class PingService(private val pingRepository: PingRepository) {
 
+    fun getPing(id: Int): Ping? {
+        return pingRepository.get(id)
+    }
+
     fun getPings(): List<Ping> {
         return pingRepository.getAll()
     }

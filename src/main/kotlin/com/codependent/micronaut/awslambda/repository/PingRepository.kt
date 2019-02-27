@@ -19,6 +19,10 @@ class PingRepository(private val environment: Environment,
 
     private val logger = LoggerFactory.getLogger(javaClass)
 
+    fun get(id: Int): Ping? {
+        return dynamoDbMapper.load(Ping::class.java, id)
+    }
+
     fun getAll(): List<Ping> {
         val pings = mutableListOf<Ping>()
         val scan = dynamoDbMapper.scan(Ping::class.java, DynamoDBScanExpression(),
@@ -47,5 +51,7 @@ class PingRepository(private val environment: Environment,
             originalTableName
         }
     }
+
+
 
 }
