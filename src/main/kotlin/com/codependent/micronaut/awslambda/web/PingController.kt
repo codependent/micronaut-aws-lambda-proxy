@@ -12,13 +12,13 @@ class PingController(private val pingService: PingService) {
 
     private val logger = LoggerFactory.getLogger(javaClass)
 
-    @Get("/")
+    @Get
     fun getPings(@Header("Host") host: String): List<Ping> {
         logger.info("Host Header {}", host)
         return pingService.getPings()
     }
 
-    @Post("/")
+    @Post
     @Status(HttpStatus.CREATED)
     fun createPing(@Body ping: Ping): Ping {
         logger.info("ping {}", ping)
